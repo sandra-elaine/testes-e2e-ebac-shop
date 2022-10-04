@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import EnderecoPage from '../support/page_objects/endereco.page'
+var faker = require('faker')
 
 context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
     /*  Como cliente 
@@ -14,6 +15,8 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         //TODO 
         cy.visit('produtos')
         var quantidade = 1
+        var nome = faker.name.firstName()
+        var email = faker.internet.email()
 
         //Escolher e adicionar ao Carrinho produtos com Comandos Customizados
         cy.addProdutos('Ajax Full-Zip Sweatshirt', 'L', 'Blue', quantidade)
@@ -42,8 +45,8 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
             cy.login(dados.usuario, dados.senha)
         });
 
-        //Utilizando Page Objects para preencher o Endereço do Faturamento
-        EnderecoPage.PreencherEnderecoDetalhesFaturamento('Debora', 'Penimpedo', 'EbacEbacEbacEbacAOBA', 'Brasil', 'AV celso', '30545885588558855885', 'Praia Grande', 'Roraima', '03063000', '1199558866', 'deborapenimpedo@gmail.com')
+        //Deve preencher o Endereço de Faturamento com sucesso! - Usando Page Objects
+        EnderecoPage.PreencherEnderecoDetalhesFaturamento(nome, 'Penimpenedo', 'EbacEbacEbacEbacAOBA', 'Brasil', 'AV celso', '30545885588558855885', 'Praia Grande', 'Roraima', '03063000', '1199558866', email)
 
         cy.get('#order_comments').clear().type('Notas sobre seu pedido, por exemplo, informações especiais sobre entrega')
         cy.get('#payment_method_bacs').check()
