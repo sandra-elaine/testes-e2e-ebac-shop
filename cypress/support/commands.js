@@ -29,7 +29,9 @@ Cypress.Commands.add('login', (usuario, senha) => {
     cy.get('#username').type(usuario)
     cy.get('#password').type(senha, { log: false })
     //cy.get('.woocommerce-form > .button').click()
-    cy.get('.woocommerce-button').click()
+    //cy.get('.woocommerce-button').click()
+    //cy.get('button').clock()
+    cy.get('#woocommerce-login-nonce').click({ force: true })
 });
 
 Cypress.Commands.add('addProdutos', (produto, tamanho, cor, quantidade) => {
